@@ -32,3 +32,5 @@ conn = mysql.connect()
 
 review = mysql.connect().cursor()
 review.execute("SELECT * FROM clients")
+
+
