@@ -104,11 +104,11 @@ p a:hover::after
 }
 ::selection
 {
-	
+
 }
 p::selection
 {
-	
+
 }
 h1{font-size: 48px;}
 h2{font-size: 36px;}
@@ -123,14 +123,14 @@ h1, h2, h3, h4, h5, h6
 	-webkit-text-shadow: rgba(0,0,0,.01) 0 0 1px;
 	text-shadow: rgba(0,0,0,.01) 0 0 1px;
 }
-h1::selection, 
-h2::selection, 
-h3::selection, 
-h4::selection, 
-h5::selection, 
+h1::selection,
+h2::selection,
+h3::selection,
+h4::selection,
+h5::selection,
 h6::selection
 {
-	
+
 }
 .form-control
 {
@@ -596,15 +596,15 @@ section
 	line-height: 50px;
 	color: #a3a3a3 !important;
 }
-.header_search_input::-moz-placeholder /* Firefox 19+ */ 
+.header_search_input::-moz-placeholder /* Firefox 19+ */
 {
 	font-size: 16px !important;
 	font-weight: 300;
 	line-height: 50px;
 	color: #a3a3a3 !important;
-} 
+}
 .header_search_input:-ms-input-placeholder
-{ 
+{
 	font-size: 16px !important;
 	font-weight: 300;
 	line-height: 50px;
@@ -663,7 +663,7 @@ section
 }
 .custom_dropdown_placeholder i
 {
-	
+
 }
 .custom_list
 {
@@ -1219,8 +1219,8 @@ select option
 }
 .contact_info_item
 {
-	width: calc((100% - 60px) / 3);
-	height: 100px;
+	width: calc((150% - 60px) / 3);
+	height: 160px;
 	border: solid 1px #e8e8e8;
 	box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
 	padding-left: 32px;
@@ -1228,8 +1228,7 @@ select option
 }
 .contact_info_image
 {
-	width: 35px;
-	height: 35px;
+	width: 90px;
 	text-align: center;
 }
 .contact_info_image img
@@ -1240,14 +1239,20 @@ select option
 {
 	padding-left: 17px;
 }
-.contact_info_title
+.contact_name_title
 {
 	font-weight: 500;
 }
-.contact_info_text
+.service_category_text
 {
-	font-size: 12px;
+	font-size: 14px;
 	color: rgba(0,0,0,0.5);
+}
+
+.contact_info_container
+{
+    margin:12px;
+	width:200%;
 }
 
 /*********************************
@@ -1317,10 +1322,10 @@ select option
 	font-size: 16px;
 	font-weight: 400;
 	color: rgba(0,0,0,0.3);
-} 
+}
 .input_field:-ms-input-placeholder,
 .text_field:-ms-input-placeholder
-{ 
+{
 	font-size: 16px;
 	font-weight: 400;
 	color: rgba(0,0,0,0.3);
@@ -1478,9 +1483,9 @@ select option
 {
 	font-size: 16px;
 	color: rgba(0,0,0,0.3);
-} 
+}
 .newsletter_input:-ms-input-placeholder
-{ 
+{
 	font-size: 16px;
 	color: rgba(0,0,0,0.3);
 }
@@ -1545,13 +1550,13 @@ select option
 	margin-bottom: 18px;
 	margin-top: -10px;
 }
-.footer .logo
+.footer
 {
 	top: auto;
-	-webkit-transform: transform: none;
+/**	-webkit-transform: transform: none;
     -moz-transform: transform: none;
     -ms-transform: transform: none;
-    -o-transform: transform: none;
+    -o-transform: transform: none;  **/
     transform: none;
 }
 .footer .logo a
@@ -1643,7 +1648,7 @@ select option
 }
 .footer_list_2
 {
-	margin-top: 42px !important; 
+	margin-top: 42px !important;
 }
 
 .copyright
@@ -1667,7 +1672,7 @@ select option
 }
 .logos
 {
-	
+
 }
 .logos_list li
 {
@@ -1677,4 +1682,14 @@ select option
 .logos_list li:last-child
 {
 	margin-right: 0px;
+}
+
+/*
+codes below are written by Rongan Li
+ */
+#search_container
+{
+   padding-left: 40%;
+   padding-top:2%;
+
 }
