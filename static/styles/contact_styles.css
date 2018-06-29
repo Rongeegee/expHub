@@ -1689,7 +1689,8 @@ codes below are written by Rongan Li
  */
 #search_container
 {
-   padding-left: 40%;
+   padding-left: 27%;
    padding-top:2%;
-
+    font-family: Monospace;
+    font-size: 1.5em;
 }
