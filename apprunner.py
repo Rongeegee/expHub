@@ -6,14 +6,12 @@ app = Flask(__name__)
 
 mysql = MySQL()
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'samSam11'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'iLove$100only'
 app.config['MYSQL_DATABASE_DB'] = 'expertHub'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
 
 conn = mysql.connect()
-
-
 
 @app.route("/")
 def index():
@@ -40,6 +38,7 @@ def expert():
 
 @app.route('/profile')
 def route2():
+    cursor = conn.cursor()
     profile_email = '"' + flask.session['button_id'] + '"'
     query = "select profileDirectory, firstname,lastname, profile_intro from clients  where email = " + profile_email
     cursor.execute(query)
