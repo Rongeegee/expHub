@@ -21,9 +21,11 @@ def index():
 @app.route('/experts')
 def route1():
     cursor = conn.cursor()
-    cursor.execute("SELECT s.email, c.firstname, c.lastname, s.category, s.skillname,s.charge, s.rateByHour, c.profileDirectory FROM `experthub`.`skills` s, `experthub`.`clients` c WHERE c.email = s.email")
-    data = cursor.fetchall()
-    return render_template("experts.html", data=data)
+    cursor.execute("SELECT email,firstname,lastname, city, state,profileDirectory,profile_intro,serviceMile FROM clients;")
+    profiles = cursor.fetchall()
+    cursor.execute("select email, category, skillname,charge, ratebyHour from skills;")
+    skills = cursor.fetchall()
+    return render_template("experts.html", profiles=profiles, skills=skills)
 
 
 app.secret_key = 'New_York_dog_meat'
@@ -46,7 +48,17 @@ def route2():
     query ="SELECT skillname, charge, rateByHour, description FROM skills WHERE email = " + profile_email
     cursor.execute(query)
     skill_info = cursor.fetchall()
-    return render_template("profile.html", profile_info = profile_info, skill_info= skill_info)
+    return render_template("profile.html", profile_info = profile_info, skill_info= skill_info,profile_email = profile_email)
+
+
+@app.route('/profile/schedule')
+def schedule():
+    cursor = conn.cursor()
+    profile_email = '"' + flask.session['button_id'] + '"'
+    query = "select appointmentDate,appointmentDate,appointmentEndTime from appointment where clientEmail = " + profile_email
+    cursor.execute(query)
+    appointment = cursor.fetchall()
+    return render_template("schedule.html",appointment=appointment)
 
 
 if __name__ == "__main__":

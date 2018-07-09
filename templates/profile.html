@@ -227,7 +227,7 @@
 								<div class="product_price"> {{ each[0] }}, ${{ each[1] }} per {{ each[2] }} hour</div>
 								<div class="product_text"><p>{{ each[3] }}</p></div>
 								<div class="button_container">
-									<button type="button" class="button cart_button">Schedule an appointment</button>
+									<a href="{{ url_for('schedule') }}"><button type="button" class="button cart_button" id={{profile_email}}>Schedule an appointment</button></a>
 									<hr>
 								</div>
 							{% endfor %}
@@ -356,6 +356,24 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <script src="../static/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
 <script src="../static/plugins/easing/easing.js"></script>
 <script src="../static/js/product_custom.js"></script>
+<script>
+	//the following JQuery retrieve the id of the button being clicked, which is the client email in this case
+$(document).ready(function() {
+ $('button').click(function(event) {
+   var the_id = event.target.id;
+    $.ajax({
+     url: "/get_id",
+     type: "get",
+     data: {the_id: the_id},
+     success: function(response) {
+
+    },
+    error: function(xhr) {
+     //Do Something to handle error
+    }
+   });
+   })});
+ </script>
 </body>
 
 </html>

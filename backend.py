@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 mysql = MySQL()
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'samSam11'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'iLove$100only'
 app.config['MYSQL_DATABASE_DB'] = 'experthub'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
