@@ -13,6 +13,7 @@ mysql.init_app(app)
 
 conn = mysql.connect()
 
+
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -21,7 +22,8 @@ def index():
 @app.route('/experts')
 def route1():
     cursor = conn.cursor()
-    cursor.execute("SELECT email,firstname,lastname, city, state,profileDirectory,profile_intro,serviceMile FROM clients;")
+    cursor.execute(
+        "SELECT email,firstname,lastname, city, state,profileDirectory,profile_intro,serviceMile FROM clients;")
     profiles = cursor.fetchall()
     cursor.execute("select email, category, skillname,charge, ratebyHour from skills;")
     skills = cursor.fetchall()
@@ -35,30 +37,40 @@ app.secret_key = 'New_York_dog_meat'
 def expert():
     button_id = flask.request.args.get('the_id')
     flask.session['button_id'] = button_id
-    return flask.jsonify({'success':True})
+    return flask.jsonify({'success': True})
 
 
 @app.route('/profile')
 def route2():
     cursor = conn.cursor()
-    profile_email = '"' + flask.session['button_id'] + '"'
+    profile_email = profile_email = ('"%s"' % flask.session['button_id'])
     query = "select profileDirectory, firstname,lastname, profile_intro from clients  where email = " + profile_email
     cursor.execute(query)
     profile_info = cursor.fetchall()
-    query ="SELECT skillname, charge, rateByHour, description FROM skills WHERE email = " + profile_email
+    query = "SELECT skillname, charge, rateByHour, description FROM skills WHERE email = " + profile_email
     cursor.execute(query)
     skill_info = cursor.fetchall()
-    return render_template("profile.html", profile_info = profile_info, skill_info= skill_info,profile_email = profile_email)
+    return render_template("profile.html", profile_info=profile_info, skill_info=skill_info,
+                           profile_email=profile_email)
 
 
 @app.route('/profile/schedule')
 def schedule():
     cursor = conn.cursor()
-    profile_email = '"' + flask.session['button_id'] + '"'
-    query = "select appointmentDate,appointmentDate,appointmentEndTime from appointment where clientEmail = " + profile_email
-    cursor.execute(query)
-    appointment = cursor.fetchall()
-    return render_template("schedule.html",appointment=appointment)
+    # profile_email = ('"%s"' % flask.session['button_id'])
+    # query = "select appointmentDate,appointmentStartTime,appointmentEndTime from appointment where clientEmail = " + profile_email
+    # cursor.execute(query)
+    #appointment = cursor.fetchall()
+    dateQuery = "SELECT appointmentDate FROM appointment WHERE DATEDIFF(NOW(), appointmentDate) >= - 7 AND DATEDIFF(NOW(), appointmentDate) <= 0 AND clientEmail = 'ron.paul@yahoo.com';"
+    cursor.execute(dateQuery)
+    appointmentDate = cursor.fetchall()
+    startTimeQuery = "SELECT appointStartTime FROM appointment WHERE DATEDIFF(NOW(), appointmentDate) >= - 7 AND DATEDIFF(NOW(), appointmentDate) <= 0 AND clientEmail = 'ron.paul@yahoo.com';"
+    cursor.execute(startTimeQuery)
+    appointStartTime = cursor.fetchall()
+    endTimeQuery = "SELECT appointEndTime FROM appointment WHERE DATEDIFF(NOW(), appointmentDate) >= - 7 AND DATEDIFF(NOW(), appointmentDate) <= 0 AND clientEmail = 'ron.paul@yahoo.com';"
+    cursor.execute(endTimeQuery)
+    appointEndTime = cursor.fetchall()
+    return render_template("schedule.html", appointmentDate=appointmentDate,appointStartTime = appointStartTime,appointEndTime=appointEndTime)
 
 
 if __name__ == "__main__":
