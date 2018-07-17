@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Responsive week calendar</title>
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+  
+      <link rel="stylesheet" href="../static/styles/schedule_style.css">
+
+  
+</head>
+
+<body onload="buildDayColumn()">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<h1 id="nose"></h1>
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>
+        <span class="date"  id="today_date"></span>
+        <span class="long"  id="today_day_long"></span>
+        <span class="short" id ="today_day_short"></span>
+      </th>
+      <th>
+        <span class="date"  id="tmr_date"></span>
+        <span class="long"  id="tmr_date_long"></span>
+        <span class="short" id="tmr_date_short"></span>
+      </th>
+      <th>
+        <span class="date"  id="two_days_later_date"></span>
+        <span class="long"  id="two_days_later_long"></span>
+        <span class="short" id="two_days_later_short"></span>
+      </th>
+      <th>
+        <span class="date"  id="three_days_later_date"></span>
+        <span class="long"  id="three_days_later_long"></span>
+        <span class="short" id="three_days_later_short"></span>
+      </th>
+      <th>
+        <span class="date"  id="four_days_later_date"></span>
+        <span class="long"  id="four_days_later_long"></span>
+        <span class="short" id="four_days_later_short"></span>
+      </th>
+      <th>
+        <span class="date"  id="five_days_later_date"></span>
+        <span class="long"  id="five_days_later_long"></span>
+        <span class="short" id="five_days_later_short"></span>
+      </th>
+      <th>
+        <span class="date"  id="six_days_later_date"></span>
+        <span class="long"  id="six_days_later_long"></span>
+        <span class="short" id="six_days_later_short"></span>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="hour" rowspan="1" style="background-color:#9DD6D6"><span>08:00 am</span></td>
+      <td id="mon_800"></td>
+      <td id="tue_800"></td>
+      <td id="wed_800"></td>
+      <td id="thu_800"></td>
+      <td id="fri_800"></td>
+      <td id="sat_800"></td>
+      <td id="sun_800"></td>
+    </tr>
+
+   <tr>
+      <td class="hour" rowspan="1" ><span>08:30 am</span></td>
+      <td id="mon_830"></td>
+      <td id="tue_830"></td>
+      <td id="wed_830"></td>
+      <td id="thu_830"></td>
+      <td id="fri_830"></td>
+      <td id="sat_830"></td>
+      <td id="sun_830"></td>
+    </tr>
+   <tr>
+      <td class="hour" rowspan="1" style="background-color:#9DD6D6"><span>09:00 am</span></td>
+      <td id="mon_900"></td>
+      <td id="tue_900"></td>
+      <td id="wed_900"></td>
+      <td id="thu_900"></td>
+      <td id="fri_900"></td>
+      <td id="sat_900"></td>
+      <td id="sun_900"></td>
+   </tr>
+  <tr>
+      <td class="hour" rowspan="1"><span>09:30 am</span></td>
+      <td id="mon_930"></td>
+      <td id="tue_930"></td>
+      <td id="wed_930"></td>
+      <td id="thu_930"></td>
+      <td id="fri_930"></td>
+      <td id="sat_930"></td>
+      <td id="sun_930"></td>
+  </tr>
+  <tr>
+      <td class="hour" rowspan="1" style="background-color:#9DD6D6"><span>10:00 am</span></td>
+      <td id="mon_1000"></td>
+      <td id="tue_1000"></td>
+      <td id="wed_1000"></td>
+      <td id="thu_1000"></td>
+      <td id="fri_1000"></td>
+      <td id="sat_1000"></td>
+      <td id="sun_1000"></td>
+  </tr>
+  <tr>
+      <td class="hour" rowspan="1"><span>10:30 am</span></td>
+      <td id="mon_1030"></td>
+      <td id="tue_1030"></td>
+      <td id="wed_1030"></td>
+      <td id="thu_1030"></td>
+      <td id="fri_1030"></td>
+      <td id="sat_1030"></td>
+      <td id="sun_1030"></td>
+  </tr>
+  <tr>
+      <td class="hour" rowspan="1" style="background-color:#9DD6D6"><span>11:00 am</span></td>
+      <td id="mon_1100"></td>
+      <td id="tue_1100"></td>
+      <td id="wed_1100"></td>
+      <td id="thu_1100"></td>
+      <td id="fri_1100"></td>
+      <td id="sat_1100"></td>
+      <td id="sun_1100"></td>
+  </tr>
+  <tr>
+      <td class="hour" rowspan="1"><span>11:30 am</span></td>
+      <td id="mon_1130"></td>
+      <td id="tue_1130"></td>
+      <td id="wed_1130"></td>
+      <td id="thu_1130"></td>
+      <td id="fri_1130"></td>
+      <td id="sat_1130"></td>
+      <td id="sun_1130"></td>
+  </tr>
+  <tr>
+      <td class="hour" rowspan="1" style="background-color:#9DD6D6"><span>12:00 pm</span></td>
+      <td id="mon_1200"></td>
+      <td id="tue_1200"></td>
+      <td id="wed_1200"></td>
+      <td id="thu_1200"></td>
+      <td id="fri_1200"></td>
+      <td id="sat_1200"></td>
+      <td id="sun_1200"></td>
+  </tr>
+  <tr>
+      <td class="hour" rowspan="1"><span>12:30 pm</span></td>
+      <td id="mon_1230"></td>
+      <td id="tue_1230"></td>
+      <td id="wed_1230"></td>
+      <td id="thu_1230"></td>
+      <td id="fri_1230"></td>
+      <td id="sat_1230"></td>
+      <td id="sun_1230"></td>
+  </tr>
+  <tr>
+      <td class="hour" rowspan="1" style="background-color:#9DD6D6"><span>01:00 pm</span></td>
+      <td id="mon_1300"></td>
+      <td id="tue_1300"></td>
+      <td id="wed_1300"></td>
+      <td id="thu_1300"></td>
+      <td id="fri_1300"></td>
+      <td id="sat_1300"></td>
+      <td id="sun_1300"></td>
+  </tr>
+  <tr>
+      <td class="hour" rowspan="1"><span>01:30 pm</span></td>
+      <td id="mon_1330"></td>
+      <td id="tue_1330"></td>
+      <td id="wed_1330"></td>
+      <td id="thu_1330"></td>
+      <td id="fri_1330"></td>
+      <td id="sat_1330"></td>
+      <td id="sun_1330"></td>
+  </tr>
+  <tr>
+      <td class="hour" rowspan="1" style="background-color:#9DD6D6"><span>02:00 pm</span></td>
+      <td id="mon_1400"></td>
+      <td id="tue_1400"></td>
+      <td id="wed_1400"></td>
+      <td id="thu_1400"></td>
+      <td id="fri_1400"></td>
+      <td id="sat_1400"></td>
+      <td id="sun_1400"></td>
+  </tr>
+  <tr>
+      <td class="hour" rowspan="1"><span>02:30 pm</span></td>
+      <td id="mon_1430"></td>
+      <td id="tue_1430"></td>
+      <td id="wed_1430"></td>
+      <td id="thu_1430"></td>
+      <td id="fri_1430"></td>
+      <td id="sat_1430"></td>
+      <td id="sun_1430"></td>
+  </tr>
+  <tr>
+      <td class="hour" rowspan="1" style="background-color:#9DD6D6"><span>03:00 pm</span></td>
+      <td id="mon_1500"></td>
+      <td id="tue_1500"></td>
+      <td id="wed_1500"></td>
+      <td id="thu_1500"></td>
+      <td id="fri_1500"></td>
+      <td id="sat_1500"></td>
+      <td id="sun_1500"></td>
+  </tr>
+  <tr>
+      <td class="hour" rowspan="1"><span>03:30 pm</span></td>
+      <td id="mon_1530"></td>
+      <td id="tue_1530"></td>
+      <td id="wed_1530"></td>
+      <td id="thu_1530"></td>
+      <td id="fri_1530"></td>
+      <td id="sat_1530"></td>
+      <td id="sun_1530"></td>
+  </tr>
+  <tr>
+      <td class="hour" rowspan="1" style="background-color:#9DD6D6"><span>04:00 pm</span></td>
+      <td id="mon_1600"></td>
+      <td id="tue_1600"></td>
+      <td id="wed_1600"></td>
+      <td id="thu_1600"></td>
+      <td id="fri_1600"></td>
+      <td id="sat_1600"></td>
+      <td id="sun_1600"></td>
+  </tr>
+  <tr>
+      <td class="hour" rowspan="1"><span>04:30 pm</span></td>
+      <td id="mon_1630"></td>
+      <td id="tue_1630"></td>
+      <td id="wed_1630"></td>
+      <td id="thu_1630"></td>
+      <td id="fri_1630"></td>
+      <td id="sat_1630"></td>
+      <td id="sun_1630"></td>
+  </tr>
+  <tr>
+      <td class="hour" rowspan="1" style="background-color:#9DD6D6"><span>05:00 pm</span></td>
+      <td id="mon_1700"></td>
+      <td id="tue_1700"></td>
+      <td id="wed_1700"></td>
+      <td id="thu_1700"></td>
+      <td id="fri_1700"></td>
+      <td id="sat_1700"></td>
+      <td id="sun_1700"></td>
+  </tr>
+  <tr>
+      <td class="hour" rowspan="1"><span>05:30 pm</span></td>
+      <td id="mon_1730"></td>
+      <td id="tue_1730"></td>
+      <td id="wed_1730"></td>
+      <td id="thu_1730"></td>
+      <td id="fri_1730"></td>
+      <td id="sat_1730"></td>
+      <td id="sun_1730"></td>
+  </tr>
+  <tr>
+      <td class="hour" rowspan="1" style="background-color:#9DD6D6"><span>06:00 pm</span></td>
+      <td id="mon_1800"></td>
+      <td id="tue_1800"></td>
+      <td id="wed_1800"></td>
+      <td id="thu_1800"></td>
+      <td id="fri_1800"></td>
+      <td id="sat_1800"></td>
+      <td id="sun_1800"></td>
+  </tr>
+  <tr>
+      <td class="hour" rowspan="1"><span>06:30 pm</span></td>
+      <td id="mon_1830"></td>
+      <td id="tue_1830"></td>
+      <td id="wed_1830"></td>
+      <td id="thu_1830"></td>
+      <td id="fri_1830"></td>
+      <td id="sat_1830"></td>
+      <td id="sun_1830"></td>
+  </tr>
+  <tr>
+      <td class="hour" rowspan="1" style="background-color:#9DD6D6"><span>07:00 pm</span></td>
+      <td id="mon_1900"></td>
+      <td id="tue_1900"></td>
+      <td id="wed_1900"></td>
+      <td id="thu_1900"></td>
+      <td id="fri_1900"></td>
+      <td id="sat_1900"></td>
+      <td id="sun_1900"></td>
+  </tr>
+  <tr>
+      <td class="hour" rowspan="1"><span>07:30 pm</span></td>
+      <td id="mon_1930"></td>
+      <td id="tue_1930"></td>
+      <td id="wed_1930"></td>
+      <td id="thu_1930"></td>
+      <td id="fri_1930"></td>
+      <td id="sat_1930"></td>
+      <td id="sun_1930"></td>
+  </tr>
+  <tr>
+      <td class="hour" rowspan="1" style="background-color:#9DD6D6"><span>08:00 pm</span></td>
+      <td id="mon_2000"></td>
+      <td id="tue_2000"></td>
+      <td id="wed_2000"></td>
+      <td id="thu_2000"></td>
+      <td id="fri_2000"></td>
+      <td id="sat_2000"></td>
+      <td id="sun_2000"></td>
+  </tr>
+  <tr>
+      <td class="hour" rowspan="1"><span>08:30 pm</span></td>
+      <td id="mon_2030"></td>
+      <td id="tue_2030"></td>
+      <td id="wed_2030"></td>
+      <td id="thu_2030"></td>
+      <td id="fri_2030"></td>
+      <td id="sat_2030"></td>
+      <td id="sun_2030"></td>
+  </tr>
+  <tr>
+      <td class="hour" rowspan="1" style="background-color:#9DD6D6"><span>09:00 pm</span></td>
+      <td id="mon_2100"></td>
+      <td id="tue_2100"></td>
+      <td id="wed_2100"></td>
+      <td id="thu_2100"></td>
+      <td id="fri_2100"></td>
+      <td id="sat_2100"></td>
+      <td id="sun_2100"></td>
+  </tr>
+  <tr>
+      <td class="hour" rowspan="1"><span>09:30 pm</span></td>
+      <td id="mon_2130"></td>
+      <td id="tue_2130"></td>
+      <td id="wed_2130"></td>
+      <td id="thu_2130"></td>
+      <td id="fri_2130"></td>
+      <td id="sat_2130"></td>
+      <td id="sun_2130"></td>
+  </tr>
+  <tr>
+      <td class="hour" rowspan="1" style="background-color:#9DD6D6"><span>10:00 pm</span></td>
+      <td id="mon_2200"></td>
+      <td id="tue_2200"></td>
+      <td id="wed_2200"></td>
+      <td id="thu_2200"></td>
+      <td id="fri_2200"></td>
+      <td id="sat_2200"></td>
+      <td id="sun_2200"></td>
+  </tr>
+  <tr>
+      <td class="hour" rowspan="1"><span>10:30 pm</span></td>
+      <td id="mon_2230"></td>
+      <td id="tue_2230"></td>
+      <td id="wed_2230"></td>
+      <td id="thu_2230"></td>
+      <td id="fri_2230"></td>
+      <td id="sat_2230"></td>
+      <td id="sun_2230"></td>
+  </tr>
+  <tr>
+      <td class="hour" rowspan="1" style="background-color:#9DD6D6"><span>11:00 pm</span></td>
+      <td id="mon_2300"></td>
+      <td id="tue_2300"></td>
+      <td id="wed_2300"></td>
+      <td id="thu_2300"></td>
+      <td id="fri_2300"></td>
+      <td id="sat_2300"></td>
+      <td id="sun_2300"></td>
+  </tr>
+  <tr>
+      <td class="hour" rowspan="1"><span>11:30 pm</span></td>
+      <td id="mon_2330"></td>
+      <td id="tue_2330"></td>
+      <td id="wed_2330"></td>
+      <td id="thu_2330"></td>
+      <td id="fri_2330"></td>
+      <td id="sat_2330"></td>
+      <td id="sun_2330"></td>
+  </tr>
+  <tr>
+      <td class="hour" rowspan="1" style="background-color:#9DD6D6"><span>12:00 pm</span></td>
+      <td id="mon_2400"></td>
+      <td id="tue_2400"></td>
+      <td id="wed_2400"></td>
+      <td id="thu_2400"></td>
+      <td id="fri_2400"></td>
+      <td id="sat_2400"></td>
+      <td id="sun_2400"></td>
+  </tr>
+  </tbody>
+</table>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+
+</body>
+<script src="../static/js/schedule_builder.js"></script>
+<script>
+    var dateArray = buildDateArray("{{appointmentDate}}");
+    var dayArray = buildDayArray(dateArray);
+    var startTimeArray = buildStartTimeArray("{{appointStartTime}}");
+    var endTimeArray = buildEndTimeArray("{{appointEndTime}}");
+    buildAvailSchedule(dayArray,startTimeArray,endTimeArray);
+</script>
+</html>

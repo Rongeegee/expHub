@@ -57,17 +57,14 @@ def route2():
 @app.route('/profile/schedule')
 def schedule():
     cursor = conn.cursor()
-    # profile_email = ('"%s"' % flask.session['button_id'])
-    # query = "select appointmentDate,appointmentStartTime,appointmentEndTime from appointment where clientEmail = " + profile_email
-    # cursor.execute(query)
-    #appointment = cursor.fetchall()
-    dateQuery = "SELECT appointmentDate FROM appointment WHERE DATEDIFF(NOW(), appointmentDate) >= - 7 AND DATEDIFF(NOW(), appointmentDate) <= 0 AND clientEmail = 'ron.paul@yahoo.com';"
+    profile_email = ('"%s"' % flask.session['button_id'])
+    dateQuery = "SELECT appointmentDate FROM appointment WHERE DATEDIFF(NOW(), appointmentDate) >= - 7 AND DATEDIFF(NOW(), appointmentDate) <= 0 AND clientEmail = " + profile_email
     cursor.execute(dateQuery)
     appointmentDate = cursor.fetchall()
-    startTimeQuery = "SELECT appointStartTime FROM appointment WHERE DATEDIFF(NOW(), appointmentDate) >= - 7 AND DATEDIFF(NOW(), appointmentDate) <= 0 AND clientEmail = 'ron.paul@yahoo.com';"
+    startTimeQuery = "SELECT appointStartTime FROM appointment WHERE DATEDIFF(NOW(), appointmentDate) >= - 7 AND DATEDIFF(NOW(), appointmentDate) <= 0 AND clientEmail = " + profile_email
     cursor.execute(startTimeQuery)
     appointStartTime = cursor.fetchall()
-    endTimeQuery = "SELECT appointEndTime FROM appointment WHERE DATEDIFF(NOW(), appointmentDate) >= - 7 AND DATEDIFF(NOW(), appointmentDate) <= 0 AND clientEmail = 'ron.paul@yahoo.com';"
+    endTimeQuery = "SELECT appointEndTime FROM appointment WHERE DATEDIFF(NOW(), appointmentDate) >= - 7 AND DATEDIFF(NOW(), appointmentDate) <= 0 AND clientEmail = " + profile_email
     cursor.execute(endTimeQuery)
     appointEndTime = cursor.fetchall()
     return render_template("schedule.html", appointmentDate=appointmentDate,appointStartTime = appointStartTime,appointEndTime=appointEndTime)
