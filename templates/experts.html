@@ -212,7 +212,7 @@
 	<div class="contact_info">
 		<div class="container">
 
-
+			<form action="{{ url_for('getSchedule') }}" method="post">
                 {% for profile in profiles %}
 
 			    	    <div class="col-lg-10 offset-lg-1">
@@ -229,13 +229,14 @@
 											{%endif%}
 										{% endfor %}
 
-										<a href="{{ url_for('route2') }}"><button id={{ profile[0] }}> View Profile</button></a>
+										<button type="submit" name="submit" value={{ profile[0] }}> View Profile</button>
 							        </div>
 					        	</div>
                             </div>
 				        </div>
 
                  {% endfor %}
+				</form>
         	</div>
 	</div>
 
@@ -413,24 +414,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
     <!--the following script is not from the template-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script>
-	//the following JQuery retrieve the id of the button being clicked, which is the client email in this case
-$(document).ready(function() {
- $('button').click(function(event) {
-   var the_id = event.target.id;
-    $.ajax({
-     url: "/get_id",
-     type: "get",
-     data: {the_id: the_id},
-     success: function(response) {
-
-    },
-    error: function(xhr) {
-     //Do Something to handle error
-    }
-   });
-   })});
- </script>
 </div>
 </body>
 

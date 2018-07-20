@@ -221,7 +221,7 @@
 						{% endfor %}
 
 						<div class="order_info d-flex flex-row">
-							<form action="#">
+							<form action="{{ url_for('getProfile') }}" method="post">
 
 							{% for each in skill_info %}
 								<div class="product_price"> {{ each[0] }}, ${{ each[1] }} per {{ each[2] }} hour</div>
@@ -356,24 +356,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <script src="../static/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
 <script src="../static/plugins/easing/easing.js"></script>
 <script src="../static/js/product_custom.js"></script>
-<script>
-	//the following JQuery retrieve the id of the button being clicked, which is the client email in this case
-$(document).ready(function() {
- $('button').click(function(event) {
-   var the_id = event.target.id;
-    $.ajax({
-     url: "/get_id",
-     type: "get",
-     data: {the_id: the_id},
-     success: function(response) {
-
-    },
-    error: function(xhr) {
-     //Do Something to handle error
-    }
-   });
-   })});
- </script>
 </body>
 
 </html>

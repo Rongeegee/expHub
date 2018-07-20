@@ -30,41 +30,33 @@ def route1():
     return render_template("experts.html", profiles=profiles, skills=skills)
 
 
-app.secret_key = 'New_York_dog_meat'
-
-
-@app.route('/get_id')
-def expert():
-    button_id = flask.request.args.get('the_id')
-    flask.session['button_id'] = button_id
-    return flask.jsonify({'success': True})
-
-
-@app.route('/profile')
-def route2():
+@app.route('/profile', methods=['POST'])
+def getProfile():
+    profileEmail = request.form['submit']
+    profileEmail = ('"%s"' % profileEmail)
     cursor = conn.cursor()
-    profile_email = profile_email = ('"%s"' % flask.session['button_id'])
-    query = "select profileDirectory, firstname,lastname, profile_intro from clients  where email = " + profile_email
+    query = "select profileDirectory, firstname,lastname, profile_intro from clients  where email = " + profileEmail
     cursor.execute(query)
     profile_info = cursor.fetchall()
-    query = "SELECT skillname, charge, rateByHour, description FROM skills WHERE email = " + profile_email
+    query = "SELECT skillname, charge, rateByHour, description FROM skills WHERE email = " + profileEmail
     cursor.execute(query)
     skill_info = cursor.fetchall()
     return render_template("profile.html", profile_info=profile_info, skill_info=skill_info,
-                           profile_email=profile_email)
+                           profileEmail = profileEmail)
 
 
-@app.route('/profile/schedule')
-def schedule():
+@app.route('/profile/schedule', methods=['POST'])
+def getSchedule():
+    profileEmail = request.form['submit']
+    profileEmail = ('"%s"' % profileEmail)
     cursor = conn.cursor()
-    profile_email = ('"%s"' % flask.session['button_id'])
-    dateQuery = "SELECT appointmentDate FROM appointment WHERE DATEDIFF(NOW(), appointmentDate) >= - 7 AND DATEDIFF(NOW(), appointmentDate) <= 0 AND clientEmail = " + profile_email
+    dateQuery = "SELECT appointmentDate FROM appointment WHERE DATEDIFF(NOW(), appointmentDate) >= - 7 AND DATEDIFF(NOW(), appointmentDate) <= 0 AND clientEmail = " + profileEmail
     cursor.execute(dateQuery)
     appointmentDate = cursor.fetchall()
-    startTimeQuery = "SELECT appointStartTime FROM appointment WHERE DATEDIFF(NOW(), appointmentDate) >= - 7 AND DATEDIFF(NOW(), appointmentDate) <= 0 AND clientEmail = " + profile_email
+    startTimeQuery = "SELECT appointStartTime FROM appointment WHERE DATEDIFF(NOW(), appointmentDate) >= - 7 AND DATEDIFF(NOW(), appointmentDate) <= 0 AND clientEmail = " + profileEmail
     cursor.execute(startTimeQuery)
     appointStartTime = cursor.fetchall()
-    endTimeQuery = "SELECT appointEndTime FROM appointment WHERE DATEDIFF(NOW(), appointmentDate) >= - 7 AND DATEDIFF(NOW(), appointmentDate) <= 0 AND clientEmail = " + profile_email
+    endTimeQuery = "SELECT appointEndTime FROM appointment WHERE DATEDIFF(NOW(), appointmentDate) >= - 7 AND DATEDIFF(NOW(), appointmentDate) <= 0 AND clientEmail = " + profileEmail
     cursor.execute(endTimeQuery)
     appointEndTime = cursor.fetchall()
     return render_template("schedule.html", appointmentDate=appointmentDate,appointStartTime = appointStartTime,appointEndTime=appointEndTime)
