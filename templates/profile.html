@@ -221,13 +221,13 @@
 						{% endfor %}
 
 						<div class="order_info d-flex flex-row">
-							<form action="{{ url_for('getProfile') }}" method="post">
+							<form action="{{ url_for('getSchedule') }}" method="post">
 
 							{% for each in skill_info %}
 								<div class="product_price"> {{ each[0] }}, ${{ each[1] }} per {{ each[2] }} hour</div>
 								<div class="product_text"><p>{{ each[3] }}</p></div>
 								<div class="button_container">
-									<a href="{{ url_for('schedule') }}"><button type="button" class="button cart_button" id={{profile_email}}>Schedule an appointment</button></a>
+									<button type="submit" name="submit" class="button cart_button" value ={{ profileEmail }}>Schedule an appointment</button>
 									<hr>
 								</div>
 							{% endfor %}

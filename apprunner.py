@@ -48,7 +48,6 @@ def getProfile():
 @app.route('/profile/schedule', methods=['POST'])
 def getSchedule():
     profileEmail = request.form['submit']
-    profileEmail = ('"%s"' % profileEmail)
     cursor = conn.cursor()
     dateQuery = "SELECT appointmentDate FROM appointment WHERE DATEDIFF(NOW(), appointmentDate) >= - 7 AND DATEDIFF(NOW(), appointmentDate) <= 0 AND clientEmail = " + profileEmail
     cursor.execute(dateQuery)

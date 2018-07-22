@@ -7,6 +7,9 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
 var timeSlot = ["800","830","900","930","1000","1030","1100","1130","1200","1230","1300","1330","1400","1430","1500", "1530",
                 "1600","1630","1700","1730","1800","1830","1900","1930","2000","2030","2100","2130","2200","2230","2300",
                 "2330","2400"];
+
+var dayDiffFromToday = ["today","tmr","2_days_later","3_days_later","4_days_later","5_days_later","6_days_later"];
+
 function getDayFromToday(num){
     if(num==1){
         return "Monday";
@@ -116,8 +119,9 @@ function buildDayArray(dateArray){
     for(i = 0; i < dateArray.length;i++){
         var dateInArray = dateArray[i].split(",");
         var date = new Date(dateInArray[0],dateInArray[1]-1,dateInArray[2]);
-        var day = getDayFromToday(date.getDay()).slice(0,3).toLowerCase();;
-        dayArray.push(day);
+        var today = new Date();
+        var dayDifference = date.getDay() - today.getDay();
+        dayArray.push(dayDiffFromToday[dayDifference]);
     }
     return dayArray;
 }
@@ -125,12 +129,18 @@ function buildDayArray(dateArray){
 function buildStartTimeArray(appointmentStartTimes){
     var startTimeString = appointmentStartTimes.slice(2,appointmentStartTimes.length-3);
     var startTimeArray = startTimeString.split(",), (");
+    if(startTimeArray.length == 1){
+        startTimeArray[0] = startTimeArray[0].slice(0,startTimeArray[0].length-1);
+    }
     return startTimeArray;
 }
 
 function buildEndTimeArray(appointmentEndTimes){
     var endTimeString = appointmentEndTimes.slice(2, appointmentEndTimes.length-3);
     var endTimeArray = endTimeString.split(",), (");
+    if(endTimeArray.length == 1){
+        endTimeArray[0] = endTimeArray[0].slice(0, endTimeArray[0].length - 1);
+    }
     return endTimeArray;
 }
 
