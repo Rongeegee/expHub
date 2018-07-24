@@ -1,6 +1,6 @@
 import flask
 from flask import *
-from flaskext.mysql import MySQL
+from flaskext.mysql import *
 
 app = Flask(__name__)
 
@@ -14,13 +14,35 @@ mysql.init_app(app)
 conn = mysql.connect()
 
 
+
+# Route for handling the login page logic
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    error = None
+    if request.method == 'POST':
+        query = "SELECT email, pword FROM customer;"
+        cursor = conn.cursor()
+        cursor.execute(query)
+        credentials = cursor.fetchall()
+        for each in credentials:
+            if request.form['username'] == each[0]:
+                if request.form['password'] == each[1]:
+                    session['logged_in'] = True
+                    return redirect(url_for('index'))
+                else:
+                    error = 'Invalid Credentials. Please try again.'
+        error = 'Invalid Credentials. Please try again.'
+    return render_template('login.html', error=error)
+
+
+
 @app.route("/")
 def index():
     return render_template("index.html")
 
 
 @app.route('/experts')
-def route1():
+def expertList():
     cursor = conn.cursor()
     cursor.execute(
         "SELECT email,firstname,lastname, city, state,profileDirectory,profile_intro,serviceMile FROM clients;")
