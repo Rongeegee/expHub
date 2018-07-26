@@ -34,7 +34,9 @@
 							<div class="top_bar_user">
 								<div class="user_icon"><img src="../static/images/user.svg" alt=""></div>
 								<div><a href="#">Register</a></div>
-								<div><a href="{{ url_for('login') }}">Sign in</a></div>
+								<%if session['logged_in'] == False%>
+									<div><a href="{{ url_for('login') }}">Sign in</a></div>
+								{%endif%}
 							</div>
 						</div>
 					</div>

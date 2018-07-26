@@ -12,10 +12,9 @@ app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
 
 conn = mysql.connect()
+app.secret_key = "fmjq3orjf9asol"
 
 
-
-# Route for handling the login page logic
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     error = None
@@ -25,19 +24,20 @@ def login():
         cursor.execute(query)
         credentials = cursor.fetchall()
         for each in credentials:
-            if request.form['username'] == each[0]:
+            if request.form['email'] == each[0]:
                 if request.form['password'] == each[1]:
                     session['logged_in'] = True
-                    return redirect(url_for('index'))
+                    session['email'] = request.form['email']
+                    return render_template('index.html')
                 else:
                     error = 'Invalid Credentials. Please try again.'
         error = 'Invalid Credentials. Please try again.'
     return render_template('login.html', error=error)
 
 
-
 @app.route("/")
 def index():
+    session['logged_in'] = False
     return render_template("index.html")
 
 
