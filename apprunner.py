@@ -43,6 +43,7 @@ def index():
 
 @app.route('/experts')
 def expertList():
+    session['client_email'] = None
     cursor = conn.cursor()
     cursor.execute(
         "SELECT email,firstname,lastname, city, state,profileDirectory,profile_intro,serviceMile FROM clients;")
@@ -56,6 +57,7 @@ def expertList():
 def getProfile():
     profileEmail = request.form['submit']
     profileEmail = ('"%s"' % profileEmail)
+    session['client_email'] = profileEmail
     cursor = conn.cursor()
     query = "select profileDirectory, firstname,lastname, profile_intro from clients  where email = " + profileEmail
     cursor.execute(query)
@@ -69,6 +71,8 @@ def getProfile():
 
 @app.route('/profile/schedule', methods=['POST'])
 def getSchedule():
+    if session['logged_in'] == False:
+        return redirect(url_for('login'))
     profileEmail = request.form['submit']
     cursor = conn.cursor()
     dateQuery = "SELECT appointmentDate FROM appointment WHERE DATEDIFF(NOW(), appointmentDate) >= - 7 AND DATEDIFF(NOW(), appointmentDate) <= 0 AND clientEmail = " + profileEmail
