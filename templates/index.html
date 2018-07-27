@@ -77,7 +77,7 @@
 							<div class="top_bar_user">
 								<div class="user_icon"><img src="{{url_for('static', filename='images/user.svg')}}" /></div>
 								<div><a href="#">Register</a></div>
-								{%if session['logged_in'] == False%}
+								{%if not session['logged_in']%}
 									<div><a href="{{ url_for('login') }}">sign in</a></div>
 								{%else%}
 									<div><a href="#">sign out</a></div>

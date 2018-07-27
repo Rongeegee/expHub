@@ -37,7 +37,6 @@ def login():
 
 @app.route("/")
 def index():
-    session['logged_in'] = False
     return render_template("index.html")
 
 

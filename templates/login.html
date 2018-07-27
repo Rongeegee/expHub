@@ -3,7 +3,8 @@
   <head>
     <title>Flask Intro - login page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="static/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="../static/styles/bootstrap.min.css"    rel="stylesheet" media="screen">
+    <link href="../static/styles/login_and_signup.css" rel="stylesheet">
   </head>
   <body>
     <div class="container">
@@ -16,7 +17,12 @@
           request.form.password }}">
         <input class="btn btn-default" type="submit" value="Login">
       </form>
-      <a href="#">Employee Loggin</a>
+      <ul>
+        <li><a href="#">Don't Have an Account?</a></li>
+        <li><a href="#">Forgot Your Password?</a></li>
+        <li><a href="#">Employee Login</a></li>
+      </ul>
+
       {% if error %}
         <p class="error"><strong>Error:</strong> {{ error }}
       {% endif %}
