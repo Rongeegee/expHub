@@ -1,3 +1,68 @@
 ul {
-  list-style-type: none;
+    margin-left: 60%;
+    list-style-type: none;
+}
+
+#email{
+    margin-left: 4%;
+    width: 20%;
+}
+
+#pwd{
+    margin-left:7.5%;
+    width: 20%;
+}
+
+#login_button{
+    margin-left: 12%;
+    border-top: 1px solid #96d1f8;
+   background: #65a9d7;
+   background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
+   background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
+   background: -moz-linear-gradient(top, #3e779d, #65a9d7);
+   background: -ms-linear-gradient(top, #3e779d, #65a9d7);
+   background: -o-linear-gradient(top, #3e779d, #65a9d7);
+   padding: 9px 18px;
+   -webkit-border-radius: 18px;
+   -moz-border-radius: 18px;
+   border-radius: 18px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: white;
+   font-size: 17px;
+   font-family: Georgia, serif;
+   text-decoration: none;
+   vertical-align: middle;
+}
+
+#login_button:hover {
+   border-top-color: #28597a;
+   background: #28597a;
+   color: #ccc;
+}
+
+#login_button:active {
+   border-top-color: #1b435e;
+   background: #1b435e;
+}
+
+#login_box{
+    margin-top:20%;
+    margin-left: 20%;
+}
+
+
+label{
+    font-size: 140%;
+}
+
+body{
+    background-image: url("../images/white_blurring_background.jpg");
+}
+
+.error{
+    color: maroon;
+    margin-left:10%;
 }

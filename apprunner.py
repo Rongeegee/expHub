@@ -35,6 +35,11 @@ def login():
     return render_template('login.html', error=error)
 
 
+@app.route('/logout')
+def logout():
+    session.pop('logged_in', None)
+    return render_template("index.html")
+
 @app.route("/")
 def index():
     return render_template("index.html")

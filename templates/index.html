@@ -80,7 +80,7 @@
 								{%if not session['logged_in']%}
 									<div><a href="{{ url_for('login') }}">sign in</a></div>
 								{%else%}
-									<div><a href="#">sign out</a></div>
+									<div><a href="{{ url_for('logout') }}">sign out</a></div>
 								{% endif %}
 							</div>
 						</div>
