@@ -57,38 +57,56 @@ def expertList():
     return render_template("experts.html", profiles=profiles, skills=skills)
 
 
+@app.route('/profile/<email>')
+def setProfile(email):
+    cursor = conn.cursor()
+    query = "select profileDirectory, firstname,lastname, profile_intro from clients  where email = " + email
+    cursor.execute(query)
+    profile_info = cursor.fetchall()
+    query = "SELECT skillname, charge, rateByHour, description FROM skills WHERE email = " + email
+    cursor.execute(query)
+    skill_info = cursor.fetchall()
+    return render_template("profile.html", profile_info=profile_info, skill_info=skill_info,
+                           profileEmail= email)
+
+
+
 @app.route('/profile', methods=['POST'])
 def getProfile():
     profileEmail = request.form['submit']
     profileEmail = ('"%s"' % profileEmail)
     session['client_email'] = profileEmail
-    cursor = conn.cursor()
-    query = "select profileDirectory, firstname,lastname, profile_intro from clients  where email = " + profileEmail
-    cursor.execute(query)
-    profile_info = cursor.fetchall()
-    query = "SELECT skillname, charge, rateByHour, description FROM skills WHERE email = " + profileEmail
-    cursor.execute(query)
-    skill_info = cursor.fetchall()
-    return render_template("profile.html", profile_info=profile_info, skill_info=skill_info,
-                           profileEmail = profileEmail)
+    return redirect(url_for('.setProfile',email = profileEmail))
+
+
+##the following method is for testing
+@app.route('/<email>')
+def test(email):
+    return render_template("test.html", email=email)
+
 
 
 @app.route('/profile/schedule', methods=['POST'])
 def getSchedule():
-    if session['logged_in'] == False:
+    try:
+        if session['logged_in'] == False:
+            return redirect(url_for('login'))
+        profileEmail = request.form['submit']
+        cursor = conn.cursor()
+        dateQuery = "SELECT appointmentDate FROM appointment WHERE DATEDIFF(NOW(), appointmentDate) >= - 7 AND DATEDIFF(NOW(), appointmentDate) <= 0 AND clientEmail = " + profileEmail
+        cursor.execute(dateQuery)
+        appointmentDate = cursor.fetchall()
+        startTimeQuery = "SELECT appointStartTime FROM appointment WHERE DATEDIFF(NOW(), appointmentDate) >= - 7 AND DATEDIFF(NOW(), appointmentDate) <= 0 AND clientEmail = " + profileEmail
+        cursor.execute(startTimeQuery)
+        appointStartTime = cursor.fetchall()
+        endTimeQuery = "SELECT appointEndTime FROM appointment WHERE DATEDIFF(NOW(), appointmentDate) >= - 7 AND DATEDIFF(NOW(), appointmentDate) <= 0 AND clientEmail = " + profileEmail
+        cursor.execute(endTimeQuery)
+        appointEndTime = cursor.fetchall()
+        return render_template("schedule.html", appointmentDate=appointmentDate, appointStartTime=appointStartTime,
+                               appointEndTime=appointEndTime)
+    except:
         return redirect(url_for('login'))
-    profileEmail = request.form['submit']
-    cursor = conn.cursor()
-    dateQuery = "SELECT appointmentDate FROM appointment WHERE DATEDIFF(NOW(), appointmentDate) >= - 7 AND DATEDIFF(NOW(), appointmentDate) <= 0 AND clientEmail = " + profileEmail
-    cursor.execute(dateQuery)
-    appointmentDate = cursor.fetchall()
-    startTimeQuery = "SELECT appointStartTime FROM appointment WHERE DATEDIFF(NOW(), appointmentDate) >= - 7 AND DATEDIFF(NOW(), appointmentDate) <= 0 AND clientEmail = " + profileEmail
-    cursor.execute(startTimeQuery)
-    appointStartTime = cursor.fetchall()
-    endTimeQuery = "SELECT appointEndTime FROM appointment WHERE DATEDIFF(NOW(), appointmentDate) >= - 7 AND DATEDIFF(NOW(), appointmentDate) <= 0 AND clientEmail = " + profileEmail
-    cursor.execute(endTimeQuery)
-    appointEndTime = cursor.fetchall()
-    return render_template("schedule.html", appointmentDate=appointmentDate,appointStartTime = appointStartTime,appointEndTime=appointEndTime)
+
 
 
 if __name__ == "__main__":
