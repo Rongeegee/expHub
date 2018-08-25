@@ -231,7 +231,7 @@
 								<div class="product_price"> {{ each[0] }}, ${{ each[1] }} per {{ each[2] }} hour</div>
 								<div class="product_text"><p>{{ each[3] }}</p></div>
 								<div class="button_container">
-									<button type="submit" name="submit" class="button cart_button" value ={{ profileEmail }}>Schedule an appointment</button>
+									<button type="submit" name="submit" class="button cart_button" value ={{ each[4] }}>Schedule an appointment</button>
 									<hr>
 								</div>
 							{% endfor %}
