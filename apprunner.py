@@ -80,7 +80,10 @@ def makeAppointment():
     end_time = appoint_info.split(',')[2]
     skill_ID = appoint_info.split(',')[3]
     street = ('"%s"' % request.form['streetAddr'])
-    aptNumber = ('"%s"' % request.form['apartNum'])
+    if request.form['apartNum'] == "":
+        aptNumber = "null"
+    else:
+        aptNumber = ('"%s"' % request.form['apartNum'])
     city = ('"%s"' % request.form['city'])
     state = ('"%s"' % request.form['state'])
     zip = request.form['zip']
