@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 mysql = MySQL()
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'iLove$100only'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'samSam11'
 app.config['MYSQL_DATABASE_DB'] = 'expertHub'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
@@ -57,6 +57,13 @@ def expertList():
     cursor.execute("select email, category, skillname,charge, ratebyHour from skills;")
     skills = cursor.fetchall()
     return render_template("experts.html", profiles=profiles, skills=skills)
+
+
+@app.route("/contact")
+def contactpage():
+    return render_template("contact.html")
+
+
 
 
 @app.route('/profile/<email>')
