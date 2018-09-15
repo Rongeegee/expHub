@@ -1,15 +1,13 @@
 import flask
 from flask import *
 from flaskext.mysql import *
-from wtforms import Form, StringField, TextAreaField, validators
-from passlib.hash import *
 
 app = Flask(__name__)
 
 mysql = MySQL()
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'Jamal1994'
-app.config['MYSQL_DATABASE_DB'] = 'expertHub'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'iLove$100only'
+app.config['MYSQL_DATABASE_DB'] = 'experthub'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
 
@@ -144,28 +142,28 @@ def getSchedule():
 
 
 
-
-
-
-
-
-
-class RegisterForm(Form):
-	name =StringField('Name',[validators.Length(min=1,max=50)])
-	username =StringField('Userame',[validators.Length(min=4,max=25)])
-	email =StringField('Email',[validators.Length(min=6,max=50)])
-	password = PasswordField('Password',[
-		validators.DataRequired(),
-		validators.EqualTo('confirm', message ='Passwords do not mathc')
-	])
-	confirm =PasswordField('Confirm Password')
-
-@app.route('/signup',methods['GET', 'POST'])
-def register():
-	form = RegisterForm(request.form)
-	if request.method =='POST' and form.validate():
-		return render_template('gefister.html')
-	return render_template('register.html',form=form)
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    error = None
+    if request.method == 'POST':
+        email = ('"%s"' % request.form['email'])
+        if request.form['password'] != request.form['password_repeat']:
+            error = 'Passwords do not match.'
+            return render_template('signup.html', error=error)
+        firstname = ('"%s"' % request.form['firstname'])
+        lastname = ('"%s"' % request.form['lastname'])
+        password = ('"%s"' % request.form['password'])
+        street = ('"%s"' % request.form['street'])
+        apt = ('"%s"' %  request.form['apt'])
+        city = ('"%s"' %  request.form['city'])
+        state =('"%s"' %  request.form['state'])
+        zip = request.form['zip']
+        apt = ('"%s"' %  request.form['apt'])
+        query = "INSERT INTO clients values (" + email + "," + password + "," + firstname + "," + lastname + "," + street + "," + city + "," + state + "," + zip + ","+ apt + "," 'null' + "," + 'null' + "," + 'null' + ");"
+        cursor = conn.cursor()
+        cursor.execute(query)
+        conn.commit()
+    return render_template('signup.html', error=error)
 
 
 if __name__ == "__main__":

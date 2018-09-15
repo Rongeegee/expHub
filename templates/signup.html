@@ -6,22 +6,72 @@
 </head>
 <body>
 <h1>Sign Up</h1>
-    <form method ="POST" action =""></form>
-    <div class ="form-group">
-        {{render field(form.name, class="form-control"}}
-    </div>
-    <div class ="form-group">
-        {{render field(form.email, class="form-control"}}
-    </div>
-    <div class ="form-group">
-        {{render field(form.username, class="form-control"}}
-    </div>
-    <div class ="form-group">
-        {{render field(form.password, class="form-control"}}
-    </div>
-    <div class ="form-group">
-        {{render field(form.confirm, class="form-control"}}
-    </div>
+<form action="" method="post">
+          <div class="form-group">
+            <label for="email">Email address:</label>
+            <input type="text" placeholder="Email" name="email" value="{{
+            request.form.email }}" id="email">
+          </div>
+
+
+          <div class="form-group">
+            <label for="firstName">first name:</label>
+            <input type="text" placeholder="city" name="firstname" value="{{
+            request.form.firstname }}" id="firstName">
+        </div>
+
+        <div class="form-group">
+            <label for="lastname">last name:</label>
+            <input type="text" placeholder="last name" name="lastname" value="{{
+            request.form.lastname }}" id="lastname">
+        </div>
+
+         <div class="form-group">
+            <label for="pwd">Password:</label>
+            <input type="password" placeholder="Password" name="password" value="{{
+            request.form.password }}" id="pwd">
+          </div>
+
+         <div class="form-group">
+            <label for="pwd">Retype Password:</label>
+            <input type="password" placeholder="Password" name="password_repeat" value="{{
+            request.form.password_repeat }}" id="pwd2">
+         </div>
+
+        <div class="form-group">
+            <label for="streetAddress">street address:</label>
+            <input type="text" placeholder="street address" name="street" value="{{
+            request.form.street }}" id="streetAddress">
+        </div>
+
+        <div class="form-group">
+            <label for="apt">apt:</label>
+            <input type="text" placeholder="apartment" name="apt" value="{{
+            request.form.apt }}" id="apt">
+        </div>
+
+        <div class="form-group">
+            <label for="email">city:</label>
+            <input type="text" placeholder="city" name="city" value="{{
+            request.form.city }}" id="city">
+        </div>
+
+        <div class="form-group">
+            <label for="email">state:</label>
+            <input type="text" placeholder="state" name="state" value="{{
+            request.form.state }}" id="state">
+        </div>
+
+        <div class="form-group">
+            <label for="email">zip:</label>
+            <input type="text" placeholder="zip" name="zip" value="{{
+            request.form.zip }}" id="zip">
+        </div>
+
+        <div>
+           <input class="btn btn-default" type="submit" value="signup" id="signup_button">
+        </div>
+</form>
 
 
 </body>
