@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 mysql = MySQL()
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'Jamal1994'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'samSam11'
 app.config['MYSQL_DATABASE_DB'] = 'expertHub'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
@@ -150,22 +150,7 @@ def getSchedule():
 
 
 
-class RegisterForm(Form):
-	name =StringField('Name',[validators.Length(min=1,max=50)])
-	username =StringField('Userame',[validators.Length(min=4,max=25)])
-	email =StringField('Email',[validators.Length(min=6,max=50)])
-	password = PasswordField('Password',[
-		validators.DataRequired(),
-		validators.EqualTo('confirm', message ='Passwords do not mathc')
-	])
-	confirm =PasswordField('Confirm Password')
 
-@app.route('/signup',methods['GET', 'POST'])
-def register():
-	form = RegisterForm(request.form)
-	if request.method =='POST' and form.validate():
-		return render_template('gefister.html')
-	return render_template('register.html',form=form)
 
 
 if __name__ == "__main__":
