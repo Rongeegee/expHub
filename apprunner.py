@@ -1,12 +1,14 @@
 import flask
 from flask import *
 from flaskext.mysql import *
+from wtforms import Form, StringField, TextAreaField, validators
+from passlib import sha256_crypt
 
 app = Flask(__name__)
 
 mysql = MySQL()
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'iLove$100only'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'Jamal1994'
 app.config['MYSQL_DATABASE_DB'] = 'expertHub'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
@@ -139,6 +141,31 @@ def getSchedule():
                                appointEndTime=appointEndTime, skill = skill)
     except:
         return redirect(url_for('login'))
+
+
+
+
+
+
+
+
+
+class RegisterForn(Form):
+	name =StringField('Name',[validators.Lenght(min=1,max=50)])
+	username =StringField('Userame',[validators.Lenght(min=4,max=25)])
+	email =StringField('Email',[validators.Lenght(min=6,max=50)])
+	password = PasswordField('Password',[
+		validators.DataRequired(),
+		validators.EqualTo('confirm', message ='Passwords do not mathc')
+	])
+	confirm =PasswordField('Confirm Password')
+
+@app.route('/signup',methods['GET', 'POST'])
+def register():
+	form = RegisterForm(request.form)
+	if request.method =='POST' and form.validate():
+		return render_template('gefister.html')
+	return render_template('register.html',form=form)
 
 
 if __name__ == "__main__":
