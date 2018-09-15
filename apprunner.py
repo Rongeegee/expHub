@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 mysql = MySQL()
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'iLove$100only'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'samSam11'
 app.config['MYSQL_DATABASE_DB'] = 'experthub'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
@@ -60,6 +60,11 @@ def expertList():
     return render_template("experts.html", profiles=profiles, skills=skills)
 
 
+
+
+
+
+
 @app.route('/profile/<email>')
 def setProfile(email):
     cursor = conn.cursor()
@@ -103,10 +108,20 @@ def makeAppointment():
     return render_template('appointmentMade.html')
 
 
+
+
+
+
+
 def getAppointId(string):
     index_first_commas = string.find(',')
     newString = string[2:index_first_commas]
     return newString
+
+
+@app.route("/customer")
+def customerview():
+    return render_template("customerview.html")
 
 
 @app.route('/profile', methods=['POST'])

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Leaflet sample</title>
+      <link rel = "stylesheet" href = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"/>
+
+
+
+      <script src = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+	  <style>
+	  body
+	  {
+		background-color:red;
+	  }
+	  </style>
+   </head>
+
+   <body>
+      <div id = "map" style = "width: 900px; height: 580px; text-align:center; margin:0 auto;"></div>
+      <script>
+         // Creating map options
+         var mapOptions = {
+            center: [40.755687, -73.897441],
+            zoom: 13
+
+         }
+		 var redIcon = new L.Icon({
+			iconUrl: '../static/images/marker-icon-2x-red.png',
+			//shadowUrl: '../static/images/marker-shadow.png',
+			iconSize: [25, 41],
+			iconAnchor: [12, 41],
+			popupAnchor: [1, -34],
+			//shadowSize: [41, 41]
+		});
+		 var locations = [
+            {name: 'Justin', category: 'Electric',location: {lat: 40.9113024, lng: -73.1234}, profile:'eric.kim@40gmail.com'},
+            {name: 'John',category: 'Plumber', location: {lat: 40.91444883, lng: -73.1149465}, profile:'john.marshall@gmail.gov'},
+            {name: 'Mike', category: 'Plumber',location: {lat: 40.91347062, lng: -73.0295759}, profile:'mike.stalin@hotmail.com'},
+            {name: 'Ron Pauls', category: 'Plumber',location: {lat: 40.9181777, lng: -73.084377}, profile:'ron.paul@yahoo.com'},
+            {name: 'Ronn',category: 'Plumber', location: {lat: 40.9195264, lng: -73.1089934}, profile:'ronn@gmail'},
+            {name: 'Victoria',category: 'Electric', location: {lat: 40.9160628, lng: -73.13961237}, profile:'Victoria@gmail'}
+        ];
+
+
+         // Creating a map object
+         var map = new L.map('map', mapOptions);
+		 //map.setMaxBounds(maxBounds);
+		 //map.fitBounds(maxBounds);
+
+         // Creating a Layer object
+         var layer = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+
+         // Adding layer to the map
+         map.addLayer(layer);
+		 var marker = L.marker([40.755687, -73.897441]).addTo(map);
+		 for(var i =0;i < locations.length; i++)
+		 {
+			marker = L.marker(locations[i].location, {icon: redIcon}).addTo(map)
+				.bindPopup(locations[i].name +'<br>'+ this.locations[i].category).openPopup();
+
+			marker.on('mouseover', function (e) {
+				this.openPopup();
+			});
+			marker.on('mouseout', function (e) {
+				this.closePopup();
+			});
+			marker.on('click', function(e) {
+				//window.open(this.options.locations[i].profile);
+				//console.log(locations[i].n);
+			window.open('http://127.0.0.1:5000/experts');
+			});
+		 }
+
+
+
+		 map.locate({setView: true, maxZoom: 15});
+
+		function onLocationFound(e) {
+			var radius = e.accuracy / 2            ;
+
+			L.marker(e.latlng).addTo(map)
+				.bindPopup("You are within " + radius + " meters from this point").openPopup();
+
+			L.circle(e.latlng, radius).addTo(map);
+		}
+
+		map.on('locationfound', onLocationFound);
+      </script>
+   </body>
+
+</html>
