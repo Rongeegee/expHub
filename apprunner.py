@@ -2,7 +2,7 @@ import flask
 from flask import *
 from flaskext.mysql import *
 from wtforms import Form, StringField, TextAreaField, validators
-from passlib import sha256_crypt
+from passlib.hash import *
 
 app = Flask(__name__)
 
@@ -150,10 +150,10 @@ def getSchedule():
 
 
 
-class RegisterForn(Form):
-	name =StringField('Name',[validators.Lenght(min=1,max=50)])
-	username =StringField('Userame',[validators.Lenght(min=4,max=25)])
-	email =StringField('Email',[validators.Lenght(min=6,max=50)])
+class RegisterForm(Form):
+	name =StringField('Name',[validators.Length(min=1,max=50)])
+	username =StringField('Userame',[validators.Length(min=4,max=25)])
+	email =StringField('Email',[validators.Length(min=6,max=50)])
 	password = PasswordField('Password',[
 		validators.DataRequired(),
 		validators.EqualTo('confirm', message ='Passwords do not mathc')
